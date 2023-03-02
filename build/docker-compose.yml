@@ -1,0 +1,21 @@
+version: '2'
+services:
+  db:
+    image: sample-mvc-api-go-db
+    container_name: sample-mvc-api-go-db
+    build: db
+    environment:
+      MYSQL_ROOT_PASSWORD: todo-password
+      TZ: "UTC"
+    ports:
+      - "127.0.0.1:3306:3306"
+  api-server:
+    image: sample-mvc-api-go-server
+    container_name: sample-mvc-api-go-server
+    build:
+      context: ../
+      dockerfile: ./build/sample-mvc-api-go/Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - db
