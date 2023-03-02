@@ -3,7 +3,6 @@
 - 基本的なCRUD操作を行うREST API
 - TODOアプリのバックエンドのイメージでTODO(タイトルと内容)の取得/追加/更新/削除が行える
 - Go言語のサンプルコードによくあるクリーンアーキテクチャに影響を受けた構成ではなく、MVC風なもの
-- 参考サイト: https://dev.classmethod.jp/articles/go-sample-rest-api/
 
 # プロジェクト構成図
 
