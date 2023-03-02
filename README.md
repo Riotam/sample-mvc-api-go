@@ -58,13 +58,13 @@ curl -i localhost:8080/todos/
 ### 新規登録APIリクエスト
 
 ```shell
-curl -i -X POST -H "Content-Type: application/json" -d '{"title":"test", "content":"テストです。"}' localhost:8080/todos/
+curl -i -X POST -H "Content-Type: application/json" -d '{"title":"新規登録されたタイトル", "content":"新規登録された本文"}' localhost:8080/todos/
 ```
 
 ### 更新APIリクエスト
 
 ```shell
-curl -i -X PUT -H "Content-Type: application/json" -d '{"title":"test", "content":"変更テスト"}' localhost:8080/todos/4
+curl -i -X PUT -H "Content-Type: application/json" -d '{"title":"変更されたタイトル", "content":"変更された本文"}' localhost:8080/todos/4
 ```
 
 ### 削除APIリクエスト
