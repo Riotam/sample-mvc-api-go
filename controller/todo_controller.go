@@ -26,6 +26,7 @@ func NewTodoController(tr repository.TodoRepository) TodoController {
 	return &todoController{tr}
 }
 
+// GetTodos はTODOを取得
 func (tc *todoController) GetTodos(w http.ResponseWriter, r *http.Request) {
 	todos, err := tc.tr.GetTodos()
 	if err != nil {
@@ -33,6 +34,7 @@ func (tc *todoController) GetTodos(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// 詰め替え []entity.TodoEntity -> []dto.TodoResponse
 	var todoResponses []dto.TodoResponse
 	for _, v := range todos {
 		todoResponses = append(todoResponses, dto.TodoResponse{Id: v.Id, Title: v.Title, Content: v.Content})

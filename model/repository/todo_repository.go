@@ -22,8 +22,11 @@ func NewTodoRepository() TodoRepository {
 	return &todoRepository{}
 }
 
+// GetTodos はTODOを取得
 func (tr *todoRepository) GetTodos() (todos []entity.TodoEntity, err error) {
 	todos = []entity.TodoEntity{}
+
+	// DBから全てのTODOを取得
 	rows, err := Db.
 		Query("SELECT id, title, content FROM todo ORDER BY id DESC")
 	if err != nil {
@@ -31,6 +34,7 @@ func (tr *todoRepository) GetTodos() (todos []entity.TodoEntity, err error) {
 		return
 	}
 
+	// １行ずつentity.TodoEntityにマッピングし、返却用のスライスに追加
 	for rows.Next() {
 		todo := entity.TodoEntity{}
 		err = rows.Scan(&todo.Id, &todo.Title, &todo.Content)

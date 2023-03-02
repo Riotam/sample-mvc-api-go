@@ -10,14 +10,19 @@ import (
 	"github.com/Riotam/sample-mvc-api-go/test"
 )
 
+// URLとハンドラ関数を関連付けるマルチプレクサと呼ばれる構造体
+// 複数のテストで共通して使うのでパッケージ変数として定義
 var mux *http.ServeMux
 
+// TestMain は前後処理のようなテストのフロー制御を行うための関数
+// 前後処理を行う必要がない場合は不要
 func TestMain(m *testing.M) {
 	setUp()
 	code := m.Run()
 	os.Exit(code)
 }
 
+// setUp は前処理用の関数 (名前は何でも良い)
 func setUp() {
 	target := NewRouter(&test.MockTodoController{})
 	mux = http.NewServeMux()
@@ -26,11 +31,16 @@ func setUp() {
 }
 
 func TestGetTodos(t *testing.T) {
+	// リクエスト生成
 	r, _ := http.NewRequest("GET", "/todos/", nil)
+
+	// レスポンスを取得するための処理
 	w := httptest.NewRecorder()
 
+	// テスト対象のハンドラ関数にリクエストを送信
 	mux.ServeHTTP(w, r)
 
+	// MockTodoControllerで設定しているステータスコード200が返却されていることを確認
 	if w.Code != 200 {
 		t.Errorf("Response cod is %v", w.Code)
 	}
